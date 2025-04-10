@@ -15,13 +15,34 @@ public class MainManager : MonoBehaviour
     
     private bool m_Started = false;
     private int m_Points;
-    
     private bool m_GameOver = false;
+    public static MainManager Instance;
+    public string PlayerName;
 
-    
+    private NameManager nameManager;
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this; 
+
+        
+        DontDestroyOnLoad(gameObject);
+
+        nameManager = FindFirstObjectByType<NameManager>();
+        if(nameManager != null){
+
+            PlayerName = nameManager.getPlayerName();
+        }
+
+    }
     // Start is called before the first frame update
     void Start()
     {
+
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -38,8 +59,10 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    void Update()
     {
+         
+      
         if (!m_Started)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -62,6 +85,10 @@ public class MainManager : MonoBehaviour
         }
     }
 
+    public void PlayerNameChange(string name)
+    {
+        PlayerName = name;
+    }
     void AddPoint(int point)
     {
         m_Points += point;

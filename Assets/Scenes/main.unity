@@ -409,6 +409,8 @@ MonoBehaviour:
   Ball: {fileID: 177912862}
   ScoreText: {fileID: 188020406}
   GameOverText: {fileID: 474497238}
+  PlayerName: 
+  nameManager: {fileID: 6171318806585944460, guid: 555ee29e099e34c7082899cb5d63ac52, type: 3}
 --- !u!1 &455529321
 GameObject:
   m_ObjectHideFlags: 0

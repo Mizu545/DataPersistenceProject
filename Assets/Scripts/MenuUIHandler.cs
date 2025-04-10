@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class MenuUIHandler : MonoBehaviour
 {
+    void Start()
+    {
+        
+    }
     public void StartNew()
     {   
         SceneManager.LoadScene(1);
