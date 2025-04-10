@@ -111,12 +111,18 @@ public class MainManager : MonoBehaviour, IMainManager
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        
+    }
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(1);
     }
 
    [System.Serializable]
     class SaveData
     {
         public int BestScore;
+        public string PlayerName;
     }
 
     public void SaveScore()
@@ -128,6 +134,14 @@ public class MainManager : MonoBehaviour, IMainManager
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
     }
 
+    public void SaveName()
+    {
+        SaveData data = new SaveData();
+        data.PlayerName = PlayerName;
+
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+    }
     public void LoadScore()
     {
         string path = Application.persistentDataPath + "/savefile.json";
@@ -137,7 +151,14 @@ public class MainManager : MonoBehaviour, IMainManager
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             BestScore = data.BestScore;
+            PlayerName = data.PlayerName;
         }
+    }
+    
+    public void Exit()
+    {
+        MainManager.Instance.SaveScore();
+      
     }
 
 }
